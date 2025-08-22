@@ -117,3 +117,91 @@ class Student(Person):
 
 student = Student("Alice", "S123")
 student.show()
+
+
+
+# method overriding
+
+"""
+Method Overriding in Python - Tutorial with Examples
+----------------------------------------------------
+This file explains:
+1. What is Method Overriding?
+2. Why and When to Override Methods
+3. Using super() to Extend Parent Behavior
+"""
+
+# 1️⃣ BASIC METHOD OVERRIDING
+class Animal:
+    def speak(self):
+        print("Animal makes a sound")
+
+class Dog(Animal):
+    # Overriding the speak method
+    def speak(self):
+        print("Dog barks")
+
+class Cat(Animal):
+    def speak(self):
+        print("Cat meows")
+
+# Each subclass provides its own version of speak()
+animals = [Dog(), Cat(), Animal()]
+for a in animals:
+    a.speak()
+print()
+
+
+# 2️⃣ OVERRIDING __str__ METHOD (Special Method)
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+
+    # Override __str__ to customize print output
+    def __str__(self):
+        return f"'{self.title}' by {self.author}"
+
+book = Book("Python Mastery", "Jane Doe")
+print(book)  # Calls overridden __str__
+print()
+
+
+# 3️⃣ USING super() TO EXTEND PARENT METHOD
+class Person:
+    def __init__(self, name):
+        self.name = name
+
+    def show_info(self):
+        print(f"Name: {self.name}")
+
+class Student(Person):
+    def __init__(self, name, student_id):
+        super().__init__(name)  # Call parent constructor
+        self.student_id = student_id
+
+    # Override show_info but also call parent version
+    def show_info(self):
+        super().show_info()  # Call parent method
+        print(f"Student ID: {self.student_id}")
+
+student = Student("Alice", "S123")
+student.show_info()
+print()
+
+
+# 4️⃣ METHOD RESOLUTION ORDER (MRO) IN MULTIPLE INHERITANCE
+class A:
+    def greet(self):
+        print("Hello from A")
+
+class B(A):
+    def greet(self):
+        print("Hello from B")
+
+class C(B, A):  # Inherits from B first
+    pass
+
+c = C()
+c.greet()  # Resolves to B's greet due to MRO
+print("MRO:", [cls.__name__ for cls in C.__mro__])
