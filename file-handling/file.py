@@ -17,6 +17,10 @@ if os.path.exists(file_path):
 else:
     print("File does not exist")
 
+# Creating a new file
+with open(file_path, "x") as file:
+    file.write("Hello, World!") 
+
 # Writing to Files
 
 with open(file_path, "w") as file:
@@ -61,3 +65,6 @@ os.mkdir("new_directory")
 # Removing Directories
 
 os.rmdir("new_directory")
+
+
+"""Make sure to handle exeptions everytime you use file handling functions"""
